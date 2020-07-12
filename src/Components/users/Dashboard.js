@@ -1,12 +1,31 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Sidebar} from '../elements/Sidebar';
 import {MainFooter} from '../elements/Footer';
 import {Navbar} from '../elements/Navbar';
 import flower_img from '../../img/flower.png';
 import add_event_img from '../../img/add.png';
+import {handleGetRequestsWithToken} from '../elements/TaskHandlers';
+import {get_user_events_url} from '../elements/Routes';
+
 
 export const Dashboard = () => {
+    const [events,setEvent] = useState([]);
+    const [processing_user_info,setProcessingInfoStatus] =  useState(true);
+    const [processing_events,setEventProcessStatus] = useState(true);
+    const [{full_name},setUserInformation] = useState({
+        full_name : ''
+    });
+
+    useEffect(()=>{
+        let {user} = JSON.parse(localStorage.getItem('user_information'));
+        setUserInformation({full_name : user.name});
+        // handleGetRequestsWithToken(`${get_user_events_url}?${user_information}`).then(res => {
+        //     console.log();
+        // });
+    },[
+
+    ]);
     return(
         <>
                             <div id="app">
@@ -18,19 +37,17 @@ export const Dashboard = () => {
                         <div className="row">
                             <div className="col-lg-8 col-sm-12 col-md-8">
                                 <div className="row">
-                                    
-                                    <div className="row">
                                         <div className="col-lg-2">
                                             <img src={flower_img} />
                                         </div>
                                         <div className="col-lg-9">
-                                            <h4 className="bold">Hi, Ayobami</h4>
+                                            <h4 className="bold">Hi, {full_name}</h4>
                                             <p>Welcome to your dashboard</p>
                                         </div>
                                     </div>
                                     
                                     <br/>
-                                    
+                                <div className="row">
                                     <div className="input-group col-md-12">
                                         <input className="form-control py-2 border-right-0 border" type="search" value="search" id="example-search-input" />
                                         <span className="input-group-append">
@@ -62,10 +79,10 @@ export const Dashboard = () => {
                                     
                                     
                                     <div className="col-lg-4">
-                                        <a href="#" className="card adder">
-                                        <img src={add_event_img} className="add" />
-                                        <p className="text-center">Create A New Event</p>
-                                        </a>
+                                        <Link to="/step_one" className="card adder">
+                                            <img src={add_event_img} className="add" />
+                                            <p className="text-center">Create A New Event</p>
+                                        </Link>
                                     </div>
                                 
                                 </div>

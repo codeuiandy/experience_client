@@ -6,9 +6,12 @@ import {BrowserRouter as Router, Switch,Route} from 'react-router-dom';
 import {Login,Signup,StepOneRegistration,StepTwoRegistration,
       StepThreeRegistration,StepFourRegistration} from '../src/Components/HomeComponents';
 import {UserDashboard} from './Components/users/UserComponents';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
       <Router>
+          <ToastContainer />
           <Switch>
                 <Route exact="/" path="/" component={Login} />
                 <Route path="/login" component={Login} />

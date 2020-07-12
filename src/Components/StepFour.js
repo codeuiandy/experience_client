@@ -202,7 +202,7 @@ export const StepFour = () => {
 								<div className="col-lg-12 margin-bottom text-right">
 									<Link to="/login" className="btn btn-outline-primary mr-3">Cancel</Link>
 									<Link to="/step_three" className="btn btn-outline-primary mr-3">Previous</Link>
-									<Link to="/payment" className="btn btn-primary">Save & Continue</Link>
+									<Link to="/user_dashboard" className="btn btn-primary">Save & Continue</Link>
 								
 								</div>
 							
