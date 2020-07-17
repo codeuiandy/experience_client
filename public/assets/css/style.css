@@ -3265,6 +3265,28 @@ tr:first-child>td>.fc-day-grid-event {
 	float: left;
 	width: 100%;
 }
+
+.event-category-enter{
+	opacity: 0;
+	display: flex;
+ }
+ .event-category-exit{
+	opacity: 1;
+	display: none;
+ }
+ .event-category-enter-active{
+	opacity: 1;
+ }
+ .event-category-exit-active{
+	opacity: 0;
+ }
+ .event-category-enter-active,
+ .event-category-exit-active{
+	transition: opacity 500ms;
+ }
+ 
+
+
 .userprofile.small .username p {
 	color: #ffff;
 	font-size: 13px;

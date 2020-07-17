@@ -6,6 +6,7 @@ import {CreateEventProgressBar} from './elements/CreateEventProgressBar';
 import { handlePostRequestWithToken } from './elements/TaskHandlers';
 import {create_event_url} from './elements/Routes';
 import { toast } from 'react-toastify';
+import {CSSTransition} from 'react-transition-group';
 export const StepOne = ({props}) => {
 	const [event_details,setEventDetails] = useState({
 		can_attend : '',
@@ -30,6 +31,7 @@ export const StepOne = ({props}) => {
 		category_counter : '1'
 	});
 	let [is_processing,setProcessingStatus] = useState(false);
+	const [inProp, setInProp] = useState(false);
     return(
         <div id="app" className="step1">
 			<div className="main-wrapper">
@@ -91,13 +93,13 @@ export const StepOne = ({props}) => {
 											<div className="card-body">
 												<h5><span className="circle">1</span> Who can attend this event?</h5>
 												<span className="options"><input name="can_attend" type="radio" className="myradio"
-													onChange={()=>setEventDetails({... event_details,can_attend : 'anyone'})}
+													onChange={()=>setEventDetails({...event_details,can_attend : 'anyone'})}
 												/> Anyone</span>
 												<span className="options"><input name="can_attend" type="radio" className="myradio"
-													onChange={()=>setEventDetails({... event_details,can_attend : 'private_list'})}
+													onChange={()=>setEventDetails({...event_details,can_attend : 'private_list'})}
 												/> Invitees on private list <i className="fa fa-info-circle"></i></span>
 												<span className="options"><input name="can_attend" type="radio" className="myradio"
-													onChange={()=>setEventDetails({... event_details,can_attend : 'invite_email'})}
+													onChange={()=>setEventDetails({...event_details,can_attend : 'invite_email'})}
 												/> Invitees via invite email <i className="fa fa-info-circle"></i></span>
 											</div>
 										</div>
@@ -108,37 +110,44 @@ export const StepOne = ({props}) => {
 											<div className="card-body">
 												<h5><span className="circle">2</span> What is the price of the event?</h5>
 												<span className="options"><input name="event_type" type="radio" className="myradio"
-													onChange={()=>setEventDetails({... event_details,event_type : 'free'})}
+													onChange={()=>{
+														setEventDetails({...event_details,event_type : 'free'});
+														setInProp(false);
+													}}
 												/> Free</span>
 												<span className="options"><input name="event_type" type="radio" className="myradio"
-													onChange={()=>setEventDetails({... event_details,event_type : 'paid'})}
+													onChange={()=>{
+														setEventDetails({...event_details,event_type : 'paid'});
+														setInProp(true);
+													}}
 												/> Paid</span>
 												
 												<div className="space"></div>
-												
-												{
-													event_details.event_type === 'paid' && (
-														<div className="row">
-															<div className="col-lg-3" style={{display: 'flex', alignItems: 'flex-end'}}>
-																<p>How many price categories?</p>
-															</div>
-															<div className="col-lg-3">
-																<select className="form-control"
-																	onChange={(event)=>{
-																		setEventDetails({... event_details,
-																			 category_counter : event.target.value});
-																	}}
-																>
-																	<option value="1">1</option>
-																	<option value="12">2</option>
-																	<option value="123">3</option>
-																	<option value="1234">4</option>
-																	<option value="12345">5</option>
-																</select>
-															</div>
+												<CSSTransition in={inProp} timeout={500000} 
+													unmountOnExit
+													classNames="event-category"
+												>
+													<div className="row fade-child">
+														<div className="col-lg-3" style={{display: 'flex', alignItems: 'flex-end'}}>
+															<p>How many price categories?</p>
 														</div>
-													)
-												}
+														<div className="col-lg-3">
+															<select className="form-control"
+																onChange={(event)=>{
+																	setEventDetails({...event_details,
+																		category_counter : event.target.value});
+																}}
+															>
+																<option value="1">1</option>
+																<option value="12">2</option>
+																<option value="123">3</option>
+																<option value="1234">4</option>
+																<option value="12345">5</option>
+															</select>
+														</div>
+													</div>
+												</CSSTransition>
+												
 												
 												
 													<div className="space"></div>
@@ -158,7 +167,7 @@ export const StepOne = ({props}) => {
 														)
 													}
 													{
-														event_details.event_type === 'paid' && [... event_details.category_counter].map((index)=>{
+														event_details.event_type === 'paid' && [...event_details.category_counter].map((index)=>{
 															return(
 																<div className="row" key={index}>
 																	<div className="col-lg-3">
@@ -195,7 +204,7 @@ export const StepOne = ({props}) => {
 															value={event_details.max_attendee}
 															onChange={(event)=>{
 																setEventDetails({
-																	... event_details,max_attendee : event.target.value
+																	...event_details,max_attendee : event.target.value
 																})
 															}}
 														/>
@@ -217,7 +226,7 @@ export const StepOne = ({props}) => {
 														<input name="event_name" type="text" className="form-control" 
 															value={event_details.event_name}
 															onChange={(event)=>setEventDetails({
-																... event_details,event_name : event.target.value
+																...event_details,event_name : event.target.value
 															})}
 														/>
 													</div>
@@ -237,7 +246,7 @@ export const StepOne = ({props}) => {
 													<div className="col-lg-12">
 														<textarea className="form-control"
 															onChange={(event)=>setEventDetails({
-																... event_details,about_event : event.target.value
+																...event_details,about_event : event.target.value
 															})}
 														>{event_details.about_event}</textarea>
 													</div>
@@ -263,7 +272,7 @@ export const StepOne = ({props}) => {
 																name="location"
 																value={event_details.venue}
 																onChange={(event)=>setEventDetails({
-																	... event_details,venue : event.target.value
+																	...event_details,venue : event.target.value
 																})}
 																required
 															/>
@@ -277,7 +286,7 @@ export const StepOne = ({props}) => {
 															<select name="time" className="myinput"
 																value={event_details.time_zone}
 																onChange={(event)=>setEventDetails({
-																	... event_details,time_zone : event.target.value
+																	event_details,time_zone : event.target.value
 																})}
 																required
 															>
@@ -302,7 +311,7 @@ export const StepOne = ({props}) => {
 																			value={event_details.line_1}
 																			onChange={(event)=>{
 																				setEventDetails({
-																					... event_details, line_1 : event.target.value
+																					...event_details, line_1 : event.target.value
 																				})
 																			}}
 																			required
@@ -314,7 +323,7 @@ export const StepOne = ({props}) => {
 																		value={event_details.city}
 																		onChange={(event)=>{
 																			setEventDetails({
-																				... event_details, city : event.target.value
+																				event_details, city : event.target.value
 																			})
 																		}}
 																		required
@@ -326,7 +335,7 @@ export const StepOne = ({props}) => {
 																		value={event_details.line_2}
 																		onChange={(event)=>{
 																			setEventDetails({
-																				... event_details, line_2 : event.target.value
+																				event_details, line_2 : event.target.value
 																			})
 																		}}
 																		required
@@ -338,7 +347,7 @@ export const StepOne = ({props}) => {
 																		value={event_details.state}
 																		onChange={(event)=>{
 																			setEventDetails({
-																				... event_details, state : event.target.value
+																				event_details, state : event.target.value
 																			})
 																		}}
 																		required
@@ -350,7 +359,7 @@ export const StepOne = ({props}) => {
 																		value={event_details.zip_code}
 																		onChange={(event)=>{
 																			setEventDetails({
-																				... event_details, zip_code : event.target.value
+																				event_details, zip_code : event.target.value
 																			})
 																		}}
 																		required
@@ -362,7 +371,7 @@ export const StepOne = ({props}) => {
 																		value={event_details.country}
 																		onChange={(event)=>{
 																			setEventDetails({
-																				... event_details, country : event.target.value
+																				event_details, country : event.target.value
 																			})
 																		}}
 																		required
@@ -395,7 +404,7 @@ export const StepOne = ({props}) => {
 																		value={event_details.start_date}
 																		onChange={(event)=>{
 																			setEventDetails({
-																				... event_details, start_date : event.target.value
+																				event_details, start_date : event.target.value
 																			})
 																		}}
 																		required
@@ -407,7 +416,7 @@ export const StepOne = ({props}) => {
 																		value={event_details.end_date}
 																		onChange={(event)=>{
 																			setEventDetails({
-																				... event_details, end_date : event.target.value
+																				event_details, end_date : event.target.value
 																			})
 																		}}
 																		required
@@ -427,7 +436,7 @@ export const StepOne = ({props}) => {
 																		value={event_details.start_time}
 																		onChange={(event)=>{
 																			setEventDetails({
-																				... event_details, start_time : event.target.value
+																				event_details, start_time : event.target.value
 																			})
 																		}}
 																		required
@@ -439,7 +448,7 @@ export const StepOne = ({props}) => {
 																		value={event_details.end_time}
 																		onChange={(event)=>{
 																			setEventDetails({
-																				... event_details, end_time : event.target.value
+																				event_details, end_time : event.target.value
 																			})
 																		}}
 																		required
