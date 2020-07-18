@@ -12,6 +12,7 @@ import team_2_img from "../../img/team2.png";
 import add_event_img from "../../img/add.png";
 import { handleGetRequestsWithToken } from "../elements/TaskHandlers";
 import { get_user_events_url } from "../elements/Routes";
+import { Bar, Doughnut } from "react-chartjs-2";
 
 export const EventDetails = () => {
 	const [events, setEvent] = useState([]);
@@ -20,7 +21,37 @@ export const EventDetails = () => {
 	const [{ full_name }, setUserInformation] = useState({
 		full_name: "",
 	});
-
+	const [totalpaymentChart, setTotalPaymentChart] = useState({});
+	const [attendeeChart, setattendeeChart] = useState({});
+	const chartTotalPayment = () => {
+		setTotalPaymentChart({
+			labels: ["Regular", "Exhibitor", "Media", "Organization"],
+			datasets: [
+				{
+					label: ["Payment Chart"],
+					data: [100, 80, 70, 60],
+					backgroundColor: ["#1E9682", " #66BAED", "#FBD11F", "#F74F4F"],
+					borderWidth: 4,
+				},
+			],
+		});
+	};
+	const attendeeCharts = () => {
+		setattendeeChart({
+			labels: ["Avalable Attendies"],
+			datasets: [
+				{
+					data: [20],
+					backgroundColor: ["#CC2E43"],
+					borderWidth: 1,
+				},
+			],
+		});
+	};
+	useEffect(() => {
+		chartTotalPayment();
+		attendeeCharts();
+	}, []);
 	// useEffect(()=>{
 	//     let {user} = JSON.parse(localStorage.getItem('user_information'));
 	//     setUserInformation({full_name : user.name});
@@ -92,10 +123,27 @@ export const EventDetails = () => {
 											<div className="card text-left">
 												<div className="card-body">
 													<h4>Total Payments</h4>
-													<canvas
-														id="Chart2"
-														className="h-400 overflow-hidden"
-													></canvas>
+													<Bar
+														// width={100}
+														// height={100}
+														data={totalpaymentChart}
+														options={{
+															responsive: true,
+															legend: {
+																display: false,
+															},
+
+															scales: {
+																yAxes: [
+																	{
+																		ticks: {
+																			beginAtZero: true,
+																		},
+																	},
+																],
+															},
+														}}
+													/>
 												</div>
 											</div>
 										</div>
@@ -117,7 +165,7 @@ export const EventDetails = () => {
 														<div className="col-12">
 															<div className="dash3 text-center">
 																<small className="text-muted mt-0">
-																	% Check In : 85%
+																	% Check In : 70%
 																</small>
 																<br />
 															</div>
@@ -130,15 +178,26 @@ export const EventDetails = () => {
 																	paddingTop: "40px",
 																}}
 															>
-																<input
-																	type="text"
-																	className="knob"
-																	value="85"
-																	data-thickness="0.2"
-																	data-width="160"
-																	data-height="160"
-																	data-fgColor="#5d61bf"
-																/>
+																<div className="box">
+																	<div className="percentage">
+																		<svg>
+																			<circle cx="70" cy="70" r="70"></circle>
+																			<circle
+																				style={{
+																					strokeDashoffset:
+																						"calc(440 - (440 * 70) / 100)",
+																					stroke: "#CC2E43",
+																				}}
+																				cx="70"
+																				cy="70"
+																				r="70"
+																			></circle>
+																		</svg>
+																		<div className="atendeNumber">
+																			<h2>70%</h2>
+																		</div>
+																	</div>
+																</div>
 															</div>
 														</div>
 													</div>
@@ -214,7 +273,8 @@ export const EventDetails = () => {
 													<div className="card-progressbar mb-0 mt-1">
 														<div className="progress h-6">
 															<div
-																className="progress-bar bg-primary w-80"
+																style={{ background: "#27AE60" }}
+																className="progress-bar  w-70"
 																role="progressbar"
 															></div>
 														</div>
@@ -227,7 +287,8 @@ export const EventDetails = () => {
 												<div className="card-progressbar">
 													<div className="progress h-6 mt-1">
 														<div
-															className="progress-bar bg-warning w-70"
+															style={{ background: "#B63C5B" }}
+															className="progress-bar  w-70"
 															role="progressbar"
 														></div>
 													</div>
@@ -239,7 +300,8 @@ export const EventDetails = () => {
 												<div className="card-progressbar">
 													<div className="progress h-6 mt-1">
 														<div
-															className="progress-bar bg-orange w-30"
+															style={{ background: "#3C96D1" }}
+															className="progress-bar  w-30"
 															role="progressbar"
 														></div>
 													</div>
@@ -251,7 +313,8 @@ export const EventDetails = () => {
 												<div className="card-progressbar">
 													<div className="progress h-6 mt-1">
 														<div
-															className="progress-bar bg-success w-30"
+															style={{ background: "#FBD11F" }}
+															className="progress-bar  w-30"
 															role="progressbar"
 														></div>
 													</div>
