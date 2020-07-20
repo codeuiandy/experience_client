@@ -13,7 +13,7 @@ import add_event_img from "../../img/add.png";
 import { handleGetRequestsWithToken } from "../elements/TaskHandlers";
 import { get_user_events_url } from "../elements/Routes";
 import { AutoresponderEmailModal } from "../elements/Modals";
-
+import Layout from "../elements/Layout/Layout";
 export const AutoresponderEmail = () => {
 	const [events, setEvent] = useState([]);
 	const [processing_user_info, setProcessingInfoStatus] = useState(true);
@@ -35,43 +35,42 @@ export const AutoresponderEmail = () => {
 		<>
 			<div id="app">
 				<div className="main-wrapper">
-					<Navbar />
-					<Sidebar />
-					<div className="app-content">
-						<section className="section">
-							<div className="row">
-								<div className="container">
-									<div className="col-lg-12 autoresponder-header">
-										<h3>Autoresponse Email</h3>
-									</div>
-									<div className="col-lg-5 margin-bottom pt-4">
-										<button
-											className="btn btn-primary p-2 mb-3"
-											data-toggle="modal"
-											data-target="#addNewSeries"
-										>
-											Add a new Series
-										</button>
-										<p style={{ fontSize: "18px" }}>
-											No autoresponse email series created yet.
-										</p>
-										<div className="report-container">
-											<div>
-												<h5>Autoresponder name</h5>
-												<p>Series of 0 email over 1 day</p>
-												<p>100 Subscribers | 0% Click rate | 0% Open rate</p>
+					<Layout>
+						<div className="app-content">
+							<section className="section">
+								<div className="row">
+									<div className="container">
+										<div className="col-lg-12 autoresponder-header">
+											<h3>Autoresponse Email</h3>
+										</div>
+										<div className="col-lg-5 margin-bottom pt-4">
+											<button
+												className="btn btn-primary p-2 mb-3"
+												data-toggle="modal"
+												data-target="#addNewSeries"
+											>
+												Add a new Series
+											</button>
+											<p style={{ fontSize: "18px" }}>
+												No autoresponse email series created yet.
+											</p>
+											<div className="report-container">
+												<div>
+													<h5>Autoresponder name</h5>
+													<p>Series of 0 email over 1 day</p>
+													<p>100 Subscribers | 0% Click rate | 0% Open rate</p>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</section>
+							</section>
 
-						<AutoresponderEmailModal />
-					</div>
+							<AutoresponderEmailModal />
+						</div>
+					</Layout>
 				</div>
 			</div>
-			<MainFooter />
 		</>
 	);
 };

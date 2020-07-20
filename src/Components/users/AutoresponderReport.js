@@ -13,6 +13,7 @@ import add_event_img from "../../img/add.png";
 import { handleGetRequestsWithToken } from "../elements/TaskHandlers";
 import { get_user_events_url } from "../elements/Routes";
 import ReportsTable from "../Tablees/reportsTable";
+import Layout from "../elements/Layout/Layout";
 export const AutoresponderReport = () => {
 	const [events, setEvent] = useState([]);
 	const [processing_user_info, setProcessingInfoStatus] = useState(true);
@@ -34,28 +35,27 @@ export const AutoresponderReport = () => {
 		<>
 			<div id="app">
 				<div className="main-wrapper">
-					<Navbar />
-					<Sidebar />
-					<div className="app-content">
-						<section className="section">
-							<div className="row">
-								<div className="container">
-									<div className="col-lg-12 autoresponder-header">
-										<h3>Autoresponder name</h3>
-									</div>
-									<div className="col-lg-12 pt-4">
-										<div>
-											<h4 style={{ fontWeight: "600", color: "#0D0D0D" }}>
-												{" "}
-												All Reports
-											</h4>
+					<Layout>
+						<div className="app-content">
+							<section className="section">
+								<div className="row">
+									<div className="container">
+										<div className="col-lg-12 autoresponder-header">
+											<h3>Autoresponder name</h3>
 										</div>
-										<div className="report-container">
-											<div className="row">
-												<div className="col-lg-12 pl-5 pr-5">
-													<div>
-														<ReportsTable />
-														{/* <table
+										<div className="col-lg-12 pt-4">
+											<div>
+												<h4 style={{ fontWeight: "600", color: "#0D0D0D" }}>
+													{" "}
+													All Reports
+												</h4>
+											</div>
+											<div className="report-container">
+												<div className="row">
+													<div className="col-lg-12 pl-5 pr-5">
+														<div>
+															<ReportsTable />
+															{/* <table
 															id="example"
 															className="table table-bordered text-nowrap w-100"
 														>
@@ -94,21 +94,21 @@ export const AutoresponderReport = () => {
 																</tr>
 															</tbody>
 														</table> */}
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-									<div className="col-lg-12 margin-bottom pt-4 text-right">
-										<button className="btn btn-primary p-2 mr-3">Back</button>
+										<div className="col-lg-12 margin-bottom pt-4 text-right">
+											<button className="btn btn-primary p-2 mr-3">Back</button>
+										</div>
 									</div>
 								</div>
-							</div>
-						</section>
-					</div>
+							</section>
+						</div>
+					</Layout>
 				</div>
 			</div>
-			<MainFooter />
 		</>
 	);
 };

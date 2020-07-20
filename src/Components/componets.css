@@ -1,0 +1,146 @@
+.wrapper {
+  width: 40vw;
+  margin-left: 120px;
+}
+
+.wrapper h1 {
+  font-weight: 600;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 41px;
+  /* identical to box height */
+  color: rgba(13, 13, 13, 0.8);
+  margin-bottom: 25px;
+}
+
+.addToCart-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-bottom: 30px;
+}
+
+/* Hide the browser's default checkbox */
+
+.addToCart-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: transparent;
+  border-radius: 15px;
+  border: 1px solid #0D0D0D;
+}
+
+/* On mouse-over, add a grey background color */
+
+.addToCart-container:hover input~.checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+
+.addToCart-container input:checked~.checkmark {
+  background-color: #0D0D0D;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+
+.addToCart-container input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+
+.addToCart-container .checkmark:after {
+  left: 10px;
+  top: 6px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.addToCart-Label {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 19px;
+  /* identical to box height */
+  color: rgba(13, 13, 13, 0.8);
+  padding-left: 40px;
+}
+
+.btn-addtocart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 100%;
+  margin: auto;
+}
+
+.btn-addtocart :nth-child(1) {
+  background-color: transparent;
+  width: 160px;
+  height: 50px;
+  border-radius: 5px;
+  font-weight: 700;
+  border: 1.5px solid #0D0D0D;
+  border-radius: 7px;
+  font-size: 16px;
+  line-height: 22px;
+  /* identical to box height */
+  text-align: center;
+  color: #0D0D0D;
+  margin-right: 30px;
+}
+
+.btn-addtocart {
+  margin-top: 60px;
+}
+
+.btn-addtocart :nth-child(2) {
+  background-color: #0D0D0D;
+  width: 160px;
+  height: 50px;
+  border-radius: 5px;
+  font-weight: 600;
+  border: 1.5px solid #0D0D0D;
+  border-radius: 7px;
+  font-size: 16px;
+  line-height: 22px;
+  /* identical to box height */
+  text-align: center;
+  color: white;
+  margin-right: 30px;
+}

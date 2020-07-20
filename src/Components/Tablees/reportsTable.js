@@ -35,6 +35,12 @@ export default class payroll extends Component {
 				Openrate: "20%",
 				Clickrate: "20",
 			},
+			{
+				info: "Congratulations! You’ve successfully created an account.",
+				Recipients: "20",
+				Openrate: "20%",
+				Clickrate: "20",
+			},
 		];
 		const body = datas.map((data, index) => ({
 			info: data.info,
@@ -94,7 +100,7 @@ export default class payroll extends Component {
 				<Table
 					body={this.bodyRow}
 					head={this.header}
-					rowsPerPage={10}
+					rowsPerPage={1}
 					rowsPerPageOption={[10, 15, 20, 25]}
 				/>
 			</div>

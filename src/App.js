@@ -22,6 +22,8 @@ import {
 } from "./Components/users/UserComponents";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AddToContactList from "./Components/addToContactList";
+import AppLayout from "./Components/elements/Layout/Layout";
 function App() {
 	return (
 		<Router>
@@ -34,7 +36,7 @@ function App() {
 				<Route path="/step_two" component={StepTwoRegistration} />
 				<Route path="/step_three" component={StepThreeRegistration} />
 				<Route path="/step_four" component={StepFourRegistration} />
-				<Route path="/user_dashboard" component={UserDashboard} />
+				<Route path="/user_dashboard" component={UserDashboard} />{" "}
 				<Route path="/user_event_details" component={UserEventDetails} />
 				<Route path="/user_autoresponder" component={UserAutoresponder} />
 				<Route
@@ -53,6 +55,7 @@ function App() {
 					path="/user_create_autoresponder"
 					component={UserCreateAutoresponder}
 				/>
+				<Route path="/add-to-cart-list" component={AddToContactList} />
 			</Switch>
 		</Router>
 	);
