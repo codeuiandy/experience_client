@@ -49,7 +49,7 @@ export const AutoresponderEmail = () => {
 												data-toggle="modal"
 												data-target="#addNewSeries"
 											>
-												Add a new Series
+												Add a new Serieshhh gdhdh
 											</button>
 											<p style={{ fontSize: "18px" }}>
 												No autoresponse email series created yet.
