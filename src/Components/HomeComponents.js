@@ -70,11 +70,16 @@ export const Login =  (props) => {
                             </div>
                         </div>
                         <br></br>
-                        <button type="submit" className="btn btn-primary btn-block"
+                        <Link className="btn btn-primary btn-block" to='/user_dashboard'>
+                        Login
+                        </Link>
+
+                        {/* The button was removed by andrew for a quick review with a client */}
+                        {/* <button type="submit" className="btn btn-primary btn-block"
                             disabled={is_processing}
                         >
                             {is_processing ? <i class="fa fa-spinner fa-spin p-2"></i> : 'Login'}
-                        </button>
+                        </button> */}
                         <p style={{paddingTop: '5px'}}>Not registered? <Link to="/signup">Sign Up</Link></p>
                         
                         <p><span className="or">Or</span></p>
